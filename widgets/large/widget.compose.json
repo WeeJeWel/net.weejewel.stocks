@@ -1,0 +1,42 @@
+{
+  "name": {
+    "en": "Large"
+  },
+  "height": 285,
+  "settings": [
+    {
+      "id": "symbol1",
+      "type": "autocomplete",
+      "title": {
+        "en": "Symbol 1"
+      }
+    },
+    {
+      "id": "symbol2",
+      "type": "autocomplete",
+      "title": {
+        "en": "Symbol 2"
+      }
+    },
+    {
+      "id": "symbol3",
+      "type": "autocomplete",
+      "title": {
+        "en": "Symbol 3"
+      }
+    },
+    {
+      "id": "symbol4",
+      "type": "autocomplete",
+      "title": {
+        "en": "Symbol 4"
+      }
+    }
+  ],
+  "api": {
+    "getSymbolData": {
+      "method": "GET",
+      "path": "/"
+    }
+  }
+}
