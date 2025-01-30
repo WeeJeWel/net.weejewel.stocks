@@ -9,10 +9,12 @@
       box-sizing: border-box;
     }
 
-    html,
     body {
       font-family: Roboto, sans-serif;
-      background-color: #1D1D24 !important;
+    }
+
+    html.homey-dark-mode body {
+      background-color: var(--homey-color-mono-050) !important;
     }
 
     #stock-widget {
@@ -26,7 +28,11 @@
       box-sizing: content-box;
       padding: 15px 0;
       height: 40px;
-      border-bottom: 1px solid #333;
+      border-bottom: 1px solid var(--homey-color-mono-050);
+    }
+
+    html.homey-dark-mode .stock {
+      border-bottom-color: var(--homey-color-mono-100);
     }
 
     .stock:first-child {
@@ -50,25 +56,13 @@
     .stock-info-symbol-name {
       font-size: 18px;
       font-weight: 600;
-    }
-
-    .stock-info-symbol-currency {
-      display: inline;
-      opacity: 0;
-      font-size: 15px;
-      font-weight: 500;
-      margin-right: 2px;
-      transition: padding 0.5s ease, opacity 0.5s ease;
-    }
-
-    .stock:hover .stock-info-symbol-currency {
-      opacity: 0.5;
+      color: var(--homey-color-mono-1000);
     }
 
     .stock-info-name {
       font-size: 15px;
       font-weight: 450;
-      color: rgba(255, 255, 255, 0.5);
+      color: var(--homey-color-mono-500);
       margin: 5px 0 0;
     }
 
@@ -86,6 +80,7 @@
     .stock-price-value {
       font-size: 18px;
       font-weight: 600;
+      color: var(--homey-color-mono-1000);
       margin-bottom: 5px;
     }
 
@@ -119,18 +114,6 @@
       height: 30px;
       margin: 0 16px;
     }
-
-    @media (prefers-color-scheme: dark) {
-      body {
-        background-color: #111218;
-        color: white;
-      }
-
-      .widget-title {
-        color: white;
-      }
-
-    }
   </style>
 </head>
 
@@ -145,7 +128,6 @@
       <div class="stock-info">
         <div class="stock-info-symbol">
           <span class="stock-info-symbol-name"></span>
-          <span class="stock-info-symbol-currency"></span>
         </div>
         <div class="stock-info-name"></div>
       </div>
@@ -165,7 +147,6 @@
       <div class="stock-info">
         <div class="stock-info-symbol">
           <span class="stock-info-symbol-name"></span>
-          <span class="stock-info-symbol-currency"></span>
         </div>
         <div class="stock-info-name"></div>
       </div>
@@ -185,7 +166,6 @@
       <div class="stock-info">
         <div class="stock-info-symbol">
           <span class="stock-info-symbol-name"></span>
-          <span class="stock-info-symbol-currency"></span>
         </div>
         <div class="stock-info-name"></div>
       </div>
@@ -205,7 +185,6 @@
       <div class="stock-info">
         <div class="stock-info-symbol">
           <span class="stock-info-symbol-name"></span>
-          <span class="stock-info-symbol-currency"></span>
         </div>
         <div class="stock-info-name"></div>
       </div>
@@ -252,9 +231,8 @@
 
       // Render Values
       $stock.querySelector('.stock-info-symbol-name').textContent = data.symbol;
-      $stock.querySelector('.stock-info-symbol-currency').textContent = data.currency;
       $stock.querySelector('.stock-info-name').textContent = data.name;
-      $stock.querySelector('.stock-price-value').textContent = Number(data.price).toFixed(2);
+      $stock.querySelector('.stock-price-value').textContent = getCurrencySymbol(data.currency) + Number(data.price).toFixed(2);
       $stock.querySelector('.stock-price-change').textContent = (data.change > 0
         ? '+'
         : ''
@@ -318,6 +296,11 @@
 
     async function getStockData(symbol) {
       return Homey.api('GET', `/?symbol=${symbol}`);
+    }
+
+    function getCurrencySymbol(currencyCode, locale = 'en-US') {
+      return (0).toLocaleString(locale, { style: 'currency', currency: currencyCode })
+        .replace(/\d|,|\.|\s/g, '');
     }
   </script>
 </body>
