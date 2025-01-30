@@ -237,7 +237,6 @@
       })
         .catch(err => {
           console.error(err);
-          document.getElementById('error').textContent = err.message;
         })
         .finally(() => {
           Homey.ready();
