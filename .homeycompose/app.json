@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "compatibility": ">=12.2.0",
   "sdk": 3,
+  "brandColor": "#4F0BC6",
   "platforms": [
     "local"
   ],
@@ -10,7 +11,7 @@
     "en": "Stocks"
   },
   "description": {
-    "en": "Follow the money."
+    "en": "Stocks for Homey Dashboards."
   },
   "category": [
     "internet"
@@ -24,5 +25,7 @@
   "author": {
     "name": "Emile Nijssen",
     "email": "emile@athom.nl"
-  }
+  },
+  "support": "mailto:emile@emile.nl",
+  "source": "https://github.com/WeeJeWel/net.weejewel.stocks/"
 }
