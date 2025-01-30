@@ -27,5 +27,12 @@
     "email": "emile@athom.nl"
   },
   "support": "mailto:emile@emile.nl",
-  "source": "https://github.com/WeeJeWel/net.weejewel.stocks/"
+  "source": "https://github.com/WeeJeWel/net.weejewel.stocks/",
+  "contributors": {
+    "developers": [
+      {
+        "name": "Bas van der Ploeg"
+      }
+    ]
+  }
 }

@@ -29,6 +29,13 @@
   },
   "support": "mailto:emile@emile.nl",
   "source": "https://github.com/WeeJeWel/net.weejewel.stocks/",
+  "contributors": {
+    "developers": [
+      {
+        "name": "Bas van der Ploeg"
+      }
+    ]
+  },
   "widgets": {
     "large": {
       "name": {
