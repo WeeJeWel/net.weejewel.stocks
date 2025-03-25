@@ -15,6 +15,7 @@
 
     #stock-widget {
       overflow: hidden;
+      padding: 16px;
     }
 
     .stock {
@@ -22,7 +23,7 @@
       justify-content: space-between;
       align-items: center;
       box-sizing: content-box;
-      padding: 15px 0;
+      padding: 16px 0;
       height: 40px;
       border-bottom: 1px solid var(--homey-line-color-light);
     }
@@ -121,7 +122,7 @@
   </style>
 </head>
 
-<body class="homey-widget">
+<body class="homey-widget-full">
 
   <div id="stock-widget">
 
@@ -205,17 +206,42 @@
           symbol4,
         } = Homey.getSettings();
 
-        symbol1 && updateSymbol(document.querySelector(`.stock[data-stock="1"]`), symbol1.symbol).catch(console.error);
-        symbol2 && updateSymbol(document.querySelector(`.stock[data-stock="2"]`), symbol2.symbol).catch(console.error);
-        symbol3 && updateSymbol(document.querySelector(`.stock[data-stock="3"]`), symbol3.symbol).catch(console.error);
-        symbol4 && updateSymbol(document.querySelector(`.stock[data-stock="4"]`), symbol4.symbol).catch(console.error);
+        if (symbol1 && !symbol1.isEmpty) {
+          updateSymbol(document.querySelector(`.stock[data-stock="1"]`), symbol1.symbol).catch(console.error);
+        } else {
+          deleteSymbol(document.querySelector(`.stock[data-stock="1"]`));
+        }
+
+        if (symbol2 && !symbol2.isEmpty) {
+          updateSymbol(document.querySelector(`.stock[data-stock="2"]`), symbol2.symbol).catch(console.error);
+        } else {
+          deleteSymbol(document.querySelector(`.stock[data-stock="2"]`));
+        }
+
+        if (symbol3 && !symbol3.isEmpty) {
+          updateSymbol(document.querySelector(`.stock[data-stock="3"]`), symbol3.symbol).catch(console.error);
+        } else {
+          deleteSymbol(document.querySelector(`.stock[data-stock="3"]`));
+        }
+
+        if (symbol4 && !symbol4.isEmpty) {
+          updateSymbol(document.querySelector(`.stock[data-stock="4"]`), symbol4.symbol).catch(console.error);
+        } else {
+          deleteSymbol(document.querySelector(`.stock[data-stock="4"]`));
+        }
       })
         .catch(err => {
           console.error(err);
         })
         .finally(() => {
-          Homey.ready();
+          Homey.ready({
+            height: document.querySelector('#stock-widget').getBoundingClientRect().height,
+          });
         });
+    }
+
+    function deleteSymbol($stock) {
+      $stock.parentNode.removeChild($stock);
     }
 
     async function updateSymbol($stock, symbol) {
